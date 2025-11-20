@@ -1,0 +1,15 @@
+kind: Pod
+apiVersion:v1
+metadata:
+  name: env
+spec:
+  containers:
+  - name: nginx
+    image: nginx:latest
+    env:
+      - name: COURSE
+        value: DevOps
+      - name: USER
+        value: "Rahul"
+      - name: DURATION
+        value: "120HRS"

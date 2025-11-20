@@ -1,0 +1,36 @@
+# ------------------- SERVICE -------------------
+apiVersion: v1
+kind: Service
+metadata:
+  name: nginx-nodeport
+spec:
+  type: NodePort
+  selector:
+    project: expense
+    component: backend
+    environment: dev
+    version: "1.0.0"
+    demo: nodeport
+  ports:
+    - protocol: TCP
+      port: 80 # Service Port
+      targetPort: 80 # Container Port
+      # we can specify a custom Node Port or else a random port will be assigned in the range 30000-32767
+      nodePort: 30007 # Node Port (30000-32767)
+
+--- # separator between multiple YAML documents
+# ------------------- POD -------------------
+apiVersion: v1
+kind: Pod
+metadata:
+  name: backend-nodeport
+  labels:
+    project: expense
+    component: backend
+    environment: dev
+    version: "1.0.0"
+    demo: nodeport
+spec:
+  containers:
+    - name: nginx
+      image: nginx
