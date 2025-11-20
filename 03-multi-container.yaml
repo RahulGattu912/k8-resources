@@ -1,0 +1,11 @@
+kind: Pod
+apiVersion: v1
+metadata:
+  name: multi-container-pod
+spec:
+  containers:
+    - name: nginx
+      image: nginx
+    - name: almalinux
+      image: almalinux:9
+      command: ["sleep", "1000"] # keep the container running because almalinux image exits immediately which leads to CrashLoopBackOff
