@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: ebs-static-pv
+spec:
+  accessModes:
+    - ReadWriteOnce
+  capacity:
+    storage: 10Gi
+  csi:
+    driver: ebs.csi.aws.com
+    volumeHandle: vol-0abcd1234efgh5678 # Replace with your actual EBS volume ID
+    fsType: ext4 # File system type
+  persistentVolumeReclaimPolicy: Retain # default is Retain, can be Changed to Recycle or Delete
+
+# this is just PV. To use it you need to claim it using PVC.
+# i.e To use it, you need to create a PersistentVolumeClaim (PVC) and then mount it in a Pod.
