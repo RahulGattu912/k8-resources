@@ -50,6 +50,7 @@ spec:
       volumeMounts:
         - mountPath: /secrets
           name: secret-volume
+  # volume is created and it must be mounted
   volumes:
     - name: secret-volume
       emptyDir: {}
