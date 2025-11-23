@@ -9,14 +9,11 @@ rules:
     verbs: ["get", "watch", "list"]
 ---
 apiVersion: rbac.authorization.k8s.io/v1
-# This role binding allows "jane" to read pods in the "default" namespace.
-# You need to already have a Role named "pod-reader" in that namespace.
 kind: RoleBinding
 metadata:
   name: sa-secret-reader
   namespace: expense
 subjects:
-  # You can specify more than one "subject"
   - kind: ServiceAccount
     name: expense-mysql-secret # "name" is case sensitive
     namespace: expense
@@ -34,6 +31,7 @@ metadata:
 spec:
   # one pod can contain multiple containers
   serviceAccount: expense-mysql-secret
+  # to interact with aws using aws cli in order to get the secret
   initContainers:
     - name: awscli
       image: amazon/aws-cli
